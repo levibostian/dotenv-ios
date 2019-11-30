@@ -15,10 +15,10 @@ jobs:
     - stage: danger
       script: bundle exec danger --fail-on-errors=true
     - stage: tests      
-      script: bundle exec rake lint
+      script: bundle exec rake lint    
     - # tests 
-      script: bundle exec rake build   
-    - stage: deploy      
+      script: bundle exec rake install && bundle exec dotenv-ios -v
+    - stage: deploy
       script: 
         - printf "%s\\n%s " "---" ":rubygems_api_key:" > ~/.gem/credentials
         - printf $RUBYGEMS_KEY >> ~/.gem/credentials

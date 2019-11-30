@@ -1,3 +1,9 @@
+# [0.1.1] - 2019-11-30
+
+## Fixed 
+- Fix installed CLI not able to find lib code at runtime
+- Added install and run task to Travis to make sure app compiles and runs from now on
+
 # [0.1.0] - 2019-11-30
 
 ## Added 

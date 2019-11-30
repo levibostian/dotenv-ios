@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dotenv-ios (0.1.0)
+    dotenv-ios (0.1.1)
       colorize (~> 0.8, >= 0.8.1)
       dotenv (~> 2.7, >= 2.7.5)
 
