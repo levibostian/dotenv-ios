@@ -24,11 +24,30 @@ let apiHost: String = Env.apiHost
 
 At first, XCode will complain that `Env.apiHost` cannot be found. Don't worry. We will be fixing that. `dotenv-ios` CLI crawls your source code looking for `Env.X` requests and generating a `Env.swift` file for you! Anytime you want to use environmental variables, you just need to add it to your source. Super easy. 
 
-* Create a new Build Phase in XCode to run this command. 
+* Create a new Build Phase in XCode to run this command. Reorder the new Build Phase to be first to run. That way this tool can generate the environment variables before XCode tries to compile your app's source code. 
 
-The shell command for this build phase is quite simple: `dotenv-ios --source PathToYourSourceCode/`
+First, create a bash script in your project (for example purposes here, we created a script named, `dot_env_ios.rb` in the root of the project. It's important to put it there so dotenv-ios can find the `.env` file in the root):
 
-Reorder the new Build Phase to be first to run. That way this tool can generate the environment variables before XCode tries to compile your app's source code. 
+```ruby
+#!/usr/bin/env ruby   
+
+require 'dotenv'
+Dotenv.load('.env')
+
+`bundle exec dotenv-ios --source #{ENV["SOURCE_CODE_DIRECTORY"]}`
+```
+
+You will notice above that I am also using the `dotenv` ruby gem to make life even easier storing a variable `SOURCE_CODE_DIRECTORY` in `.env` I can use in this script. 
+
+Now, back to XCode build scripts. Leave the shell as the default, `/bin/sh` and have the script in XCode simply execute your bash script you just made:
+
+```
+./dot_env_ios.rb
+```
+
+Done! 
+
+*Note: It's highly recommended you checkout [this quick doc](https://gist.github.com/levibostian/aac45628ff00f677888824d651cc7724) on how to run ruby scripts within XCode as you may encounter issues along the way.*
 
 * Run a build in XCode (Cmd + B) to run the `dotenv-ios` CLI tool. 
 
