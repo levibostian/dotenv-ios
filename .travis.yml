@@ -1,8 +1,8 @@
 language: ruby
 
 install:
-  - gem install bundler 
   - bundle install
+  
 cache:
   bundler: true 
 
