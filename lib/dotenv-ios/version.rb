@@ -3,7 +3,7 @@
 module DotEnviOS
   class Version
     def self.get
-      '0.1.1'
+      '0.1.2'
     end
   end
 end

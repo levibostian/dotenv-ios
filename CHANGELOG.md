@@ -1,3 +1,8 @@
+# [0.1.2] - 2019-12-30
+
+## Fixed 
+- Special characters at end of var ignored. [Issue](https://github.com/levibostian/dotenv-ios/issues/3)
+
 # [0.1.1] - 2019-11-30
 
 ## Fixed 
