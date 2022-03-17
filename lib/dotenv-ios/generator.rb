@@ -62,7 +62,7 @@ module DotEnviOS
     end
 
     def get_values(requests)
-      variables = Dotenv.parse('.env')
+      variables = Dotenv.parse(@options.envFile)
       values = {}
 
       requests.each do |request|

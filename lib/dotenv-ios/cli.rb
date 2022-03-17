@@ -11,7 +11,7 @@ require_relative './version'
 require 'dotenv'
 
 module DotEnviOS
-  Options = Struct.new(:source, :out, :verbose, :debug)
+  Options = Struct.new(:envFile, :source, :out, :verbose, :debug)
 
   class CLI
     def initialize
@@ -26,6 +26,7 @@ module DotEnviOS
 
     def parse_options
       options = Options.new
+      options.envFile = Pathname.new('./.env')
       options.verbose = false
       options.debug = false
 
@@ -35,6 +36,9 @@ module DotEnviOS
         opts.on('-v', '--version', 'Print version') do
           puts DotEnviOS::Version.get
           exit
+        end
+        opts.on('--envFile FILE', 'The \'.env\' file you wish to use. \'.env\' by default') do |envFile|
+          options.envFile = envFile
         end
         opts.on('-s', '--source DIR', 'Source code directory to check for requested environment variables') do |source|
           options.source = source
